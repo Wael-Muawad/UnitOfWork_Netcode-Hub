@@ -14,6 +14,7 @@ namespace CompanyManagement.DataAccess.EFContext
         {
         }
 
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }

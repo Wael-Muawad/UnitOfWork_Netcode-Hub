@@ -1,12 +1,10 @@
-﻿using CompanyManagement.Domain.Intefaces;
-
-namespace CompanyManagement.Domain.Entities;
+﻿namespace CompanyManagement.Domain.Entities;
 
 public class Order 
 {
     public int Id { get; set; }
     public string ItemName { get; set; } = string.Empty;
-    public decimal Amount { get; set; }
+    public double Amount { get; set; }
 
     //Nav
     public int CustomerId { get; set; }
