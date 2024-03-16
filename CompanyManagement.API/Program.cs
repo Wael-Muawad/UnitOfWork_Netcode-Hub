@@ -13,9 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContextFactory<AppDbContext>();
+var con = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContextFactory<AppDbContext>( op =>{  op.UseSqlServer(con); });
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddMvc().AddJsonOptions(_ => _.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddMvc().AddJsonOptions
+    (op => op.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 

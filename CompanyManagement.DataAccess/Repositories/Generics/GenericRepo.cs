@@ -10,41 +10,40 @@ public class GenericRepo<TEntity, TKey> : IGenericRepo<TEntity, TKey>
                         where TKey : IEquatable<TKey>
 {
     private readonly AppDbContext _context;
-    private readonly DbSet<TEntity> _dbSet;
+    //private readonly DbSet<TEntity> _dbSet;
 
     public GenericRepo(AppDbContext context)
     {
-        _context = context;        
-        _dbSet = _context.Set<TEntity>(); ;
+        _context = context;
     }
 
     public async Task Add(TEntity entity)
     {
-        await _dbSet.AddAsync(entity);
+        await _context.Set<TEntity>().AddAsync(entity);
     }
 
     public void Delete(TEntity entity)
     {
-        _dbSet.Remove(entity);
+        _context.Set<TEntity>().Remove(entity);
     }
 
     public async Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
     {
-        return await _dbSet.Where(predicate).ToListAsync();
+        return await _context.Set<TEntity>().Where(predicate).ToListAsync();
     }
 
     public async Task<List<TEntity>> GetAll()
     {
-        return await _dbSet.ToListAsync();
+        return await _context.Set<TEntity>().ToListAsync();
     }
 
     public async Task<TEntity?> GetById(TKey id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _context.Set<TEntity>().FindAsync(id);
     }
 
     public void Update(TEntity entity)
     {
-        _dbSet.Update(entity);
+        _context.Set<TEntity>().Update(entity);
     }
 }
