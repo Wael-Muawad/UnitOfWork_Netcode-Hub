@@ -29,7 +29,7 @@ public class GenericRepo<TEntity, TKey> : IGenericRepo<TEntity, TKey>
 
     public async Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
     {
-        return await _context.Set<TEntity>().Where(predicate).ToListAsync();
+        return await _context.Set<TEntity>().AsNoTracking().Where(predicate).ToListAsync();
     }
 
     public async Task<List<TEntity>> GetAll()
